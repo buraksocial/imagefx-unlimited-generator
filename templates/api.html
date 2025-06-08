@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ImageFX API Documentation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#6366F1',
+                        secondary: '#4F46E5',
+                        accent: '#C7D2FE',
+                        dark: '#1F2937'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #6366F1 0%, #4F46E5 100%);
+        }
+        .animate-gradient {
+            background-size: 200% 200%;
+            animation: gradient 5s ease infinite;
+        }
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        pre {
+            background-color: #1F2937;
+            color: #E5E7EB;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        code {
+            font-family: 'Courier New', Courier, monospace;
+            background-color: #374151;
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.25rem;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen font-sans">
+    <!-- Background Pattern -->
+    <div class="fixed inset-0 z-0 opacity-10">
+        <div class="absolute inset-0" style="background-image: url('data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%236366F1' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')"></div>
+    </div>
+
+    <div class="relative z-10">
+        <nav class="glass-effect fixed top-0 w-full shadow-sm z-50">
+            <div class="container mx-auto px-4 py-3">
+                <div class="flex justify-between items-center">
+                    <div class="flex items-center space-x-2">
+                        <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                        </svg>
+                        <span class="text-xl font-semibold text-dark">API Documentation</span>
+                    </div>
+                    <a href="/" class="flex items-center space-x-2 text-gray-600 hover:text-primary transition-colors duration-200">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+                        </svg>
+                        <span>Back to Generator</span>
+                    </a>
+                </div>
+            </div>
+        </nav>
+
+        <div class="container mx-auto px-4 pt-24 pb-12">
+            <header class="text-center mb-12">
+                <h1 class="text-4xl md:text-5xl font-bold text-dark mb-4 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">ImageFX API</h1>
+                <p class="text-gray-600 text-lg">Generate AI images programmatically</p>
+            </header>
+
+            <div class="max-w-4xl mx-auto space-y-8">
+                <!-- Generate Images Endpoint -->
+                <section class="glass-effect rounded-2xl shadow-xl p-8">
+                    <h2 class="text-2xl font-bold text-dark mb-4">Generate Images</h2>
+                    <p class="text-gray-600 mb-6">Generate AI images using a simple GET request.</p>
+                    
+                    <div class="mb-6">
+                        <h3 class="text-lg font-semibold text-dark mb-2">Endpoint</h3>
+                        <pre class="mb-4">GET /api/generate</pre>
+                        
+                        <h3 class="text-lg font-semibold text-dark mb-2">Parameters</h3>
+                        <div class="space-y-2 mb-4">
+                            <div class="flex items-start space-x-2">
+                                <code>prompt</code>
+                                <span class="text-gray-600">(required) - Text description of the image to generate</span>
+                            </div>
+                            <div class="flex items-start space-x-2">
+                                <code>count</code>
+                                <span class="text-gray-600">(optional) - Number of images to generate (1-8, default: 4)</span>
+                            </div>
+                            <div class="flex items-start space-x-2">
+                                <code>seed</code>
+                                <span class="text-gray-600">(optional) - Seed value for consistent results</span>
+                            </div>
+                        </div>
+                        
+                        <h3 class="text-lg font-semibold text-dark mb-2">Example Request</h3>
+                        <pre class="mb-4">http://your-server/api/generate?prompt=a beautiful sunset over mountains&count=4&seed=12345</pre>
+                        
+                        <h3 class="text-lg font-semibold text-dark mb-2">Example Response</h3>
+                        <pre class="mb-4">{
+    "success": true,
+    "images": [
+        {
+            "url": "data:image/png;base64,...",
+            "seed": 12345,
+            "prompt": "a beautiful sunset over mountains"
+        }
+    ]
+}</pre>
+                        
+                        <h3 class="text-lg font-semibold text-dark mb-2">Error Response</h3>
+                        <pre class="mb-4">{
+    "error": "Error message here"
+}</pre>
+                    </div>
+                    
+                    <div class="mt-8">
+                        <h3 class="text-lg font-semibold text-dark mb-4">Usage Examples</h3>
+                        
+                        <div class="space-y-4">
+                            <div>
+                                <h4 class="font-medium text-dark mb-2">JavaScript</h4>
+                                <pre>async function generateImage(prompt) {
+    const response = await fetch(`http://your-server/api/generate?prompt=${encodeURIComponent(prompt)}`);
+    const data = await response.json();
+    
+    if (data.success) {
+        data.images.forEach(image => {
+            const img = document.createElement('img');
+            img.src = image.url;
+            document.body.appendChild(img);
+        });
+    } else {
+        console.error(data.error);
+    }
+}</pre>
+                            </div>
+                            
+                            <div>
+                                <h4 class="font-medium text-dark mb-2">Python</h4>
+                                <pre>import requests
+
+def generate_image(prompt):
+    response = requests.get(
+        'http://your-server/api/generate',
+        params={
+            'prompt': prompt,
+            'count': 4
+        }
+    )
+    data = response.json()
+    
+    if data['success']:
+        for image in data['images']:
+            print(f"Image URL: {image['url']}")
+            print(f"Seed: {image['seed']}")
+    else:
+        print(f"Error: {data['error']}")</pre>
+                            </div>
+                            
+                            <div>
+                                <h4 class="font-medium text-dark mb-2">cURL</h4>
+                                <pre>curl "http://your-server/api/generate?prompt=a%20beautiful%20sunset%20over%20mountains&count=4"</pre>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Settings API Endpoint -->
+                <section class="glass-effect rounded-2xl shadow-xl p-8">
+                    <h2 class="text-2xl font-bold text-dark mb-4">Settings API</h2>
+                    <p class="text-gray-600 mb-6">Manage application settings programmatically.</p>
+                    
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-lg font-semibold text-dark mb-2">Get Settings</h3>
+                            <pre class="mb-4">GET /api/settings</pre>
+                            <p class="text-gray-600 mb-4">Retrieve current application settings.</p>
+                            <pre class="mb-4">{
+    "authToken": "********",
+    "defaultCount": 4
+}</pre>
+                        </div>
+                        
+                        <div>
+                            <h3 class="text-lg font-semibold text-dark mb-2">Update Settings</h3>
+                            <pre class="mb-4">POST /api/settings</pre>
+                            <p class="text-gray-600 mb-4">Update application settings.</p>
+                            <pre class="mb-4">{
+    "authToken": "your-auth-token",
+    "defaultCount": 4
+}</pre>
+                            <p class="text-gray-600">Response:</p>
+                            <pre class="mb-4">{
+    "message": "Settings saved successfully"
+}</pre>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 
