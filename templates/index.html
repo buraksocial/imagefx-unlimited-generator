@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ImageFX Generator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#6366F1',
+                        secondary: '#4F46E5',
+                        accent: '#C7D2FE',
+                        dark: '#1F2937'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #6366F1 0%, #4F46E5 100%);
+        }
+        .animate-gradient {
+            background-size: 200% 200%;
+            animation: gradient 5s ease infinite;
+        }
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen font-sans">
+    <!-- Background Pattern -->
+    <div class="fixed inset-0 z-0 opacity-10">
+        <div class="absolute inset-0" style="background-image: url('data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%236366F1' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')"></div>
+    </div>
+
+    <div class="relative z-10">
+        <nav class="glass-effect fixed top-0 w-full shadow-sm z-50">
+            <div class="container mx-auto px-4 py-3">
+                <div class="flex justify-between items-center">
+                    <div class="flex items-center space-x-2">
+                        <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                        </svg>
+                        <span class="text-xl font-semibold text-dark">ImageFX</span>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <a href="/api" class="flex items-center space-x-2 text-gray-600 hover:text-primary transition-colors duration-200">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                            </svg>
+                            <span>API Docs</span>
+                        </a>
+                        <a href="/settings" class="flex items-center space-x-2 text-gray-600 hover:text-primary transition-colors duration-200">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            </svg>
+                            <span>Settings</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <div class="container mx-auto px-4 pt-24 pb-12">
+            <header class="text-center mb-12">
+                <h1 class="text-4xl md:text-5xl font-bold text-dark mb-4 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">AI Image Generator</h1>
+                <p class="text-gray-600 text-lg">Create stunning images using Google's ImageFX AI</p>
+            </header>
+
+            <div class="max-w-2xl mx-auto glass-effect rounded-2xl shadow-xl p-8 mb-12">
+                <form id="generateForm" class="space-y-6">
+                    <div>
+                        <label for="prompt" class="block text-sm font-medium text-gray-700 mb-2">Your Vision</label>
+                        <textarea id="prompt" name="prompt" rows="3" 
+                            class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200 bg-white/50"
+                            placeholder="Describe the image you want to create..."></textarea>
+                    </div>
+                    
+                    <div class="grid grid-cols-2 gap-6">
+                        <div>
+                            <label for="count" class="block text-sm font-medium text-gray-700 mb-2">Number of Images</label>
+                            <div class="relative">
+                                <input type="number" id="count" name="count" min="1" max="8" value="{{ default_count }}" 
+                                    class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200 bg-white/50">
+                                <span class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400">/8</span>
+                            </div>
+                        </div>
+                        <div>
+                            <label for="seed" class="block text-sm font-medium text-gray-700 mb-2">Seed (Optional)</label>
+                            <input type="number" id="seed" name="seed" 
+                                class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200 bg-white/50"
+                                placeholder="For consistent results">
+                        </div>
+                    </div>
+
+                    <button type="submit" class="w-full gradient-bg animate-gradient text-white font-semibold py-4 px-6 rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200">
+                        Generate Magic ✨
+                    </button>
+                </form>
+            </div>
+
+            <div id="loading" class="hidden">
+                <div class="flex flex-col items-center justify-center space-y-4 mb-12">
+                    <div class="relative">
+                        <div class="w-12 h-12 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
+                        <div class="absolute top-0 left-0 w-12 h-12 border-4 border-accent border-b-transparent rounded-full animate-spin" style="animation-duration: 1.5s;"></div>
+                    </div>
+                    <p class="text-gray-600 text-lg animate-pulse">Creating your masterpiece...</p>
+                </div>
+            </div>
+
+            <div id="error" class="hidden max-w-2xl mx-auto bg-red-50 border-l-4 border-red-400 p-4 mb-8 rounded-r-xl" role="alert">
+                <div class="flex">
+                    <div class="flex-shrink-0">
+                        <svg class="h-5 w-5 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </div>
+                    <div class="ml-3">
+                        <p class="text-sm text-red-700" id="errorMessage"></p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="results" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Images will be displayed here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('generateForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const prompt = document.getElementById('prompt').value;
+            const count = document.getElementById('count').value;
+            const seed = document.getElementById('seed').value;
+            
+            document.getElementById('loading').classList.remove('hidden');
+            document.getElementById('error').classList.add('hidden');
+            document.getElementById('results').innerHTML = '';
+
+            try {
+                const response = await fetch('/generate', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        prompt,
+                        count,
+                        seed: seed || null
+                    })
+                });
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(data.error || 'Failed to generate images');
+                }
+
+                const resultsDiv = document.getElementById('results');
+                data.imagePanels.forEach(panel => {
+                    panel.generatedImages.forEach(image => {
+                        const imgContainer = document.createElement('div');
+                        imgContainer.className = 'glass-effect rounded-2xl overflow-hidden shadow-lg transform hover:scale-102 transition-transform duration-200 relative group';
+                        
+                        const img = document.createElement('img');
+                        img.src = `data:image/png;base64,${image.encodedImage}`;
+                        img.className = 'w-full h-auto';
+                        img.alt = prompt;
+                        
+                        // Add overlay with buttons
+                        const overlay = document.createElement('div');
+                        overlay.className = 'absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-50 transition-all duration-300 flex items-center justify-center space-x-4 opacity-0 group-hover:opacity-100';
+                        
+                        // Download button
+                        const downloadBtn = document.createElement('button');
+                        downloadBtn.className = 'bg-white text-gray-800 p-2 rounded-full shadow-lg hover:bg-gray-100 transform hover:scale-110 transition-all duration-200';
+                        downloadBtn.innerHTML = `
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                            </svg>
+                        `;
+                        downloadBtn.onclick = () => {
+                            const link = document.createElement('a');
+                            link.href = `data:image/png;base64,${image.encodedImage}`;
+                            link.download = `imagefx-${Date.now()}.png`;
+                            document.body.appendChild(link);
+                            link.click();
+                            document.body.removeChild(link);
+                        };
+                        
+                        // Preview button
+                        const previewBtn = document.createElement('button');
+                        previewBtn.className = 'bg-white text-gray-800 p-2 rounded-full shadow-lg hover:bg-gray-100 transform hover:scale-110 transition-all duration-200';
+                        previewBtn.innerHTML = `
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                            </svg>
+                        `;
+                        previewBtn.onclick = () => {
+                            // Create modal for preview
+                            const modal = document.createElement('div');
+                            modal.className = 'fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50';
+                            modal.innerHTML = `
+                                <div class="relative max-w-4xl mx-auto p-4">
+                                    <img src="data:image/png;base64,${image.encodedImage}" class="max-h-[80vh] rounded-lg shadow-xl">
+                                    <button class="absolute top-4 right-4 text-white hover:text-gray-300 transition-colors duration-200">
+                                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                        </svg>
+                                    </button>
+                                </div>
+                            `;
+                            
+                            // Add close functionality
+                            modal.querySelector('button').onclick = () => {
+                                document.body.removeChild(modal);
+                            };
+                            
+                            // Close on click outside
+                            modal.onclick = (e) => {
+                                if (e.target === modal) {
+                                    document.body.removeChild(modal);
+                                }
+                            };
+                            
+                            document.body.appendChild(modal);
+                        };
+                        
+                        overlay.appendChild(downloadBtn);
+                        overlay.appendChild(previewBtn);
+                        
+                        const details = document.createElement('div');
+                        details.className = 'p-4';
+                        details.innerHTML = `
+                            <p class="text-sm text-gray-600">Seed: ${image.seed}</p>
+                            <p class="text-sm text-gray-500 mt-1 line-clamp-2">${prompt}</p>
+                        `;
+                        
+                        imgContainer.appendChild(img);
+                        imgContainer.appendChild(overlay);
+                        imgContainer.appendChild(details);
+                        resultsDiv.appendChild(imgContainer);
+                    });
+                });
+            } catch (error) {
+                document.getElementById('error').classList.remove('hidden');
+                document.getElementById('errorMessage').textContent = error.message;
+            } finally {
+                document.getElementById('loading').classList.add('hidden');
+            }
+        });
+    </script>
+</body>
+</html> 
